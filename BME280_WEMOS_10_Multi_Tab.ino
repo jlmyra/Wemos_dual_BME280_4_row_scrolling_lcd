@@ -11,25 +11,25 @@ WiFiClient client;
 //********************Location Settings*****************************
 
 //*****BASEMENT WEMOS D1 (myraclegarden.com)
-//unsigned long myChannelNumber = 79378;  const char * myWriteAPIKey = "U0RIIBW1U68RE6B9"; String api_key = "414250ebeaabfb8a3a0d3def18efed69";
+//unsigned long myChannelNumber = 79378;  const char * myWriteAPIKey = ""; String api_key = "";
  
 //******QUONSET WEMOS D1 (mgcquonset.com)
-unsigned long myChannelNumber = 77784;/*ThingSpeak*/ const char * myWriteAPIKey = "PGIXBEEVDHXX2P7E"; String api_key = "a3b5b8546a3e6c6176d070209992785c"; //DarkSky API
+unsigned long myChannelNumber = 77784;/*ThingSpeak*/ const char * myWriteAPIKey = ""; String api_key = ""; //DarkSky API
 
 //********************Location Settings*****************************
 
 //*********************** WIFI SETTINGS **************************
 const char *ssid = "DeMEtEr";
 //const char *ssid = "DiOnySyS";
-const char *password = "QNX6SKnuCeky";
+const char *password = "";
 
-//const char *password = "QNX6SKnuCek";
+//const char *password = "";
 
 //char ssid[] = "JLM_iPhone";
-//char password[] = "x7ypavwb9g86b";
+//char password[] = "";
 
 //const char *ssid = "Maplewood_GC"; //Quonset
-//const char *password = "wru3A@Ur";//Quonset
+//const char *password = "";//Quonset
 
 //***********************End WIFI SETTINGS **************************
 
