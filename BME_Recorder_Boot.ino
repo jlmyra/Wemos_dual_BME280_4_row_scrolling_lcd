@@ -6,69 +6,68 @@ void bme280RecorderBoot() {
 
 //Greeting
   
-      Serial.println("***Hello!!!***");
-      Serial.println();
-      Serial.println("I'm awake");
-      Serial.println();
-      lcd.init();
-      lcd.backlight();
-      lcd.begin(screenWidth,screenHeight);     //initialize the lcd
-      lcd.clear();
-      lcd.setCursor(0, 0);
-      lcd.print("     Hello!     ");
-      lcd.setCursor(0, 1);
-      lcd.print("   I'm awake");
-      delay(2000);
+  Serial.println(F("***Hello!!!***"));
+  Serial.println();
+  Serial.println(F("I'm awake"));
+  Serial.println();
+  lcd.init();
+  lcd.backlight();
+  lcd.begin(screenWidth,screenHeight);     //initialize the lcd
+  lcd.clear();
+  lcd.setCursor(0, 0);
+  lcd.print(F("     Hello!     "));
+  lcd.setCursor(0, 1);
+  lcd.print(F("   I'm awake"));
+  delay(2000);
 
 //
-//Check BME 280 Sensors
+//Check BME 280 Sensors connectivity - if not connected-reboot
 //
   Serial.println();
-  Serial.println("Checking Multi Bosch BME280 Barometric Pressure-Humidity-Temp Sensors"); 
+  Serial.println(F("Checking Multi Bosch BME280 Barometric Pressure-Humidity-Temp Sensors")); 
 
-  if (!bme1.begin(0x76)) {
-   Serial.println("Could not find a First BME280 sensor, check wiring!");
+  if (!bme1.begin(0x76))
+  {
+   Serial.println(F("Could not find a First BME280 sensor, check wiring!"));
    lcd.clear();
    lcd.setCursor(0, 0);
-   lcd.print("BME1 wiring error");
+   lcd.print(F("BME1 wiring error"));
    delay(3000);
    while (1);  //infinite loop and crash, restart
   }
-  if (!bme2.begin(0x77)) {
-   Serial.println("Could not find a Second BME280 sensor, check wiring!");
+  if (!bme2.begin(0x77)) 
+  {
+   Serial.println(F("Could not find a Second BME280 sensor, check wiring!"));
    lcd.clear();
    lcd.setCursor(0, 0);
    lcd.print("BME2 wiring error");
    delay(3000);
    while (1); //infinite loop and crash, restart
   }
-   Serial.println("BME-1 and BME-2 are connected"); 
+   Serial.println(F("BME-1 and BME-2 are connected")); 
    Serial.println();
    lcd.clear();
    lcd.setCursor(0, 0);
-   lcd.print("BME1 Responding");
+   lcd.print(F("BME1 Responding"));
    lcd.setCursor(0, 1);
-   lcd.print("BME2 Responding");
+   lcd.print(F("BME2 Responding"));
    delay(2000);
 
   //Connect to WiFi and Report Status
 
   lcd.clear();
   lcd.setCursor(0, 0);
-  //checkWiFi();
 
   int x = 0;
     if(WiFi.status() != WL_CONNECTED){
     Serial.print("Attempting to connect to wifi: "); Serial.println(ssid);
-    //WiFi.begin(ssid, password);  // Connect to WPA/WPA2 network. Change this line if using open or WEP network
-    //WiFi.reconnect();
     lcd.clear();
     lcd.setCursor(0,0);
-    lcd.print("  Attempting WiFi   ");
+    lcd.print(F("  Attempting WiFi   "));
     lcd.setCursor(0,1);
-    lcd.print("     connection     ");
+    lcd.print(F("     connection     "));
     
-    x = 1;
+    x = 1; //Connection attempt counter
     
    if (WiFi.status() == WL_IDLE_STATUS) {
     Serial.println("WiFi WL_IDLE_STATUS");
@@ -92,7 +91,7 @@ void bme280RecorderBoot() {
   }
     while(WiFi.status() != WL_CONNECTED){
       if ( x == 21) {
-        while (1);
+        while (1);  //If it doesn't connect in 20 tries - reboot
         }
     lcd.setCursor(0,2);
     lcd.print("attempt: ");
@@ -110,19 +109,15 @@ void bme280RecorderBoot() {
   if(x>0){
   Serial.println();
   }
-   //Connect or reconnect to WiFi
+   //Connected to WiFi - display connection info
   if(WiFi.status() == WL_CONNECTED) {
     Serial.print("WiFi CONNECTED; ");
   }
 
-
-
-
-  
   Serial.println();  
   Serial.print("WiFi IP Address: "); Serial.println(WiFi.localIP());
   Serial.print("ESP8266 MAC: "); Serial.println(WiFi.macAddress());
-  long rssi = WiFi.RSSI();
+  //long rssi = WiFi.RSSI();
   Serial.print("RSSI Signal Strength= "); Serial.println(WiFi.RSSI());
   
     lcd.clear();
@@ -139,24 +134,39 @@ void bme280RecorderBoot() {
 //Display the current time from NTP Server
 
     Serial.println("Check time from the NTP Server");
-    getNTC_Time();
+    
+    getNTC_Time(dateArr, numericalDate, timeF);
+    
       // Send time and date to serial monitor
     Serial.print("");
     Serial.print("Time: "); Serial.println(timeF);
-    Serial.print("Date: "); Serial.println(date);
+    Serial.print("Date: ");
+    //for (int i = 0; i <= 23; i++){
+      //Serial.print(dateArr[i]);  
+      Serial.print(dateArrPtr);
+    //}
+      Serial.println();
+    //Serial.println(dateArrPtr);
 
     // Display time and date on the 20x4 LCD
     lcd.setCursor(0, 0);
     lcd.print(timeF);
     lcd.setCursor(0, 1);
-    lcd.print(date);
+    //for (int i = 0; i <= 23; i++){
+      //lcd.print(dateArr[i]);
+      lcd.print(dateArrPtr);  
+    //}
+    
+    //lcd.print(dateArr);
     delay(3000);
     lcd.clear();
 
      Serial.println();
      lcd.setCursor(0, 3);             
      lcd.print("**Get Dark Sky Upd**");
-     getDarkSky();
+     
+     getDarkSky(row2, row3);  // call the getDarkSky function and pass row2 and row3 array data which is 0 now.
+     
      Serial.println();
   }
 

@@ -2,62 +2,82 @@
 //***********Function to Scroll Row 0 on LCD*******************
 //**************************************************************
 
-void moveLetters(String row0Line){
-/*LCD line 1
-  int stringStart, stringStop = 0; //Initialize Row 0 Scrolling Letter Counter
-  int scrollCursor = screenWidth;  //Initialize Row 0 Scrolling Letter variable
-  String mlr01 = "BME280-1 ";     //Text for scrolling lcd Row 0-space required at end of string to clear the screen
-  String mlr02 = "Ambient T:";    //Text for scrolling lcd Row 0
-  String mlr03 = "F RH:";         //Text for scrolling lcd Row 0
-  String mlr04 = "% BP:";         //Text for scrolling lcd Row 0
-  String mlr05 = "in Hg ";        //Text for scrolling lcd Row 0
-  String mlr0;                   //Text for scrolling lcd Row 0
-*/
+void moveLetters(char *row0Ptr){
 
-  ML_currentMillis = millis();
-  if (ML_currentMillis - ML_previousMillis > ML_interval) {
-      ML_previousMillis = ML_currentMillis; 
-       
-      if(oldmlr0.length() != row0Line.length() && DSR3_previousMillis > GDS_interval){
+  row0_currentMillis = millis();
+  if (row0_currentMillis - row0_previousMillis > row0_interval) {
+      row0_previousMillis = row0_currentMillis; 
+      
+  //Test to see if Line length has changed    
+   
+    if(old_row0StrLen != new_row0StrLen && row0_previousMillis > GDS_interval)
+    {
+
     stringStart = stringStop = 0;
     scrollCursor = screenWidth;
 
    Serial.println();
-   Serial.println("                ##########################################################");   
-   Serial.println("                @@@@@@@@@@@@ mlr0 Resetting start, stop & width @@@@@@@@@@");
-   Serial.println("                ##########################################################");
+   Serial.println(F("                ##########################################################"));   
+   Serial.println(F("                @@@@@@@@@@@@ mlr0 Resetting start, stop & width @@@@@@@@@@"));
+   Serial.println(F("                ##########################################################"));
    Serial.println();
+   Serial.println(F("Function row0 after strlen"));
    
-   oldmlr0 = row0Line;
-  }
-  /*    
-  mlr0 = numericalDate + timeF + mlr02 + temperatureBME1 + char(223) +
-             mlr03 + humidityBME1 + mlr04 + baropressBME1 + mlr05;
-  */
-    lcd.setCursor(scrollCursor, 0);
-    lcd.print(row0Line.substring(stringStart,stringStop));
-            
-      if(stringStart == 0 && scrollCursor > 0)
-      {
+   old_row0StrLen = strlen(row0Ptr);
+    }
+    
+//Begin lcd.print Routine
+
+    lcd.setCursor(scrollCursor, 0);//scrollCursor starts at 20 stringStart, stringStart start at 0
+          
+//***-FIRST-'if' to lcd.print the first 20 characters 
+       
+      if(stringStart == 0 && scrollCursor > 0) //***-FIRST-'if'
+      {              
+      for (int i = 0; i < stringStop; i++)
+        {
+      lcd.print (row0Ptr[i]); //***PRINT TO LCD***
+        }     
       scrollCursor--;
-      stringStop++;
+      stringStop++;          
       } 
-      else if (stringStart == stringStop)
+
+ //***-SECOND-'if' to lcd.print End of line reached--reset everything
+ 
+      else
+       
+      if (stringStart == stringStop) //***-SECOND-'if'
       {
       stringStart = stringStop = 0;
-      scrollCursor = screenWidth;
+      scrollCursor = screenWidth;     
       } 
-      else if (stringStop == row0Line.length() && scrollCursor == 0) 
-      {
+
+//*--THIRD-- if: Print the last 20 characters of the line
+
+  else
+  
+  if (stringStop == strlen(row0Ptr) && scrollCursor == 0) //*--THIRD-- if: Print the last 20 characters of the line
+  {     
+        for (int i = stringStart; i< stringStop; i++)
+        {
+        lcd.print(row0Ptr[i]);//***PRINT TO LCD***
+        }
+        
       stringStart++;
-      } 
+  }  
+//---Fourth if line0: lcd.print next 20 character chunks shifting the line by one character  
       else 
-      {
+      {      
+        for (int i = stringStart; i< stringStop; i++)
+        {      
+      lcd.print(row0Ptr[i]);//***PRINT TO LCD***
+        }
+      
       stringStart++;
-      stringStop++;
-      }       
-    }
+      stringStop++;      
+     }
   }
+}
 
 //**************************************************************
 //***********Function to Scroll Row 0 on LCD*******************
