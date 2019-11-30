@@ -14,7 +14,7 @@
   DSW_current *current = new DSW_current;
   DSW_hourly *hourly = new DSW_hourly;
   DSW_daily  *daily = new DSW_daily;
-  //DSW_minutely *minutely = new DSW_minutely;
+  DSW_minutely *minutely = new DSW_minutely;
   //minutely = nullptr; // extra
   
   old_row0StrLen = strlen(row0Ptr); //Keeps track of the LCD line character lengths. If they change the counters in
@@ -29,7 +29,7 @@
 //yield(); //caused the sketch to stall here???
   
   //dsw.getForecast(current, hourly, daily, api_key, latitude, longitude, units, language);
-  dsw.getForecast(current, nullptr, hourly, daily, api_key, latitude, longitude, units, language);
+  dsw.getForecast(current, minutely, hourly, daily, api_key, latitude, longitude, units, language);
 
 
   //Serial display of number of DarkSky accesses since last boot 

@@ -8,23 +8,23 @@ WiFiClient client; //for Thingspeak
 //********************Location Settings*****************************
 
 //*****BASEMENT WEMOS D1 (myraclegarden.com)
-unsigned long myChannelNumber = XXXXXXX;  const char * myWriteAPIKey = "XXXXXXXXXXXXXXX"; String api_key = "XXXXXXXXXXXXXXXXX";
+unsigned long myChannelNumber = 79378;  const char * myWriteAPIKey = "U0RIIBW1U68RE6B9"; String api_key = "414250ebeaabfb8a3a0d3def18efed69";
  
 //******QUONSET WEMOS D1 (mgcquonset.com)
-//unsigned long myChannelNumber = XXXXXXXX; const char * myWriteAPIKey = "XXXX"; String api_key = "XXXXXXXXX"; //DarkSky API
+//unsigned long myChannelNumber = 77784; const char * myWriteAPIKey = "PGIXBEEVDHXX2P7E"; String api_key = "a3b5b8546a3e6c6176d070209992785c"; //DarkSky API
 
 //********************Location Settings*****************************
 
 //*********************** WIFI SETTINGS **************************
+//const char *ssid = "DeMEtEr";
+const char *ssid = "DiOnySyS";
+const char *password = "QNX6SKnuCeky";
 
-const char *ssid = "XXXXXXXX";
-const char *password = "XXXXXXXXXXXXX";
+//const char *ssid = "JLM_iPhone";
+//const char *password = "x7ypavwb9g86b";
 
-//const char *ssid = "XXXXXXXXXXXX";
-//const char *password = "XXXXXXXXXXXXX";
-
-//const char *ssid = "XXXXXXXXXXXXX"; //Quonset
-//const char *password = "XXXXXXXXXXXX";//Quonset
+//const char *ssid = "Maplewood_GC"; //Quonset
+//const char *password = "wru3A@Ur";//Quonset
 
 //***********************End WIFI SETTINGS **************************
 
@@ -212,18 +212,18 @@ unsigned long TR_previousMillis = 0; //Take Reading BME280's Timer
 unsigned long TR_interval = 3000; //Take Reading BME280's Timer
 
 unsigned long row0_previousMillis = 0; //LCD Row 0 Move Letters
-unsigned long row0_interval = 325; //LCD Row 0 Move Letters
+unsigned long row0_interval = 420; //LCD Row 0 Move Letters
 unsigned long row0_currentMillis = 0;
 
 unsigned long GDS_previousMillis = 0; //Get DarkSky Update
 unsigned long GDS_interval = 300000;  //Every 5 minutes (300000 / 1000 / 60)
 
 unsigned long row2_previousMillis = 0; //DarkSky LCD Row 2 timer
-unsigned long row2_interval = 350;  //DarkSky LCD Row 2 timer
+unsigned long row2_interval = 430;  //DarkSky LCD Row 2 timer
 unsigned long row2_currentMillis = 0;
 
 unsigned long row3_previousMillis = 0; //DarkSky LCD Row 3 timer
-unsigned long row3_interval = 310;  //DarkSky LCD Row 3 timer
+unsigned long row3_interval = 440;  //DarkSky LCD Row 3 timer
 unsigned long row3_currentMillis = 0;
 
 //******************Timers*********************
