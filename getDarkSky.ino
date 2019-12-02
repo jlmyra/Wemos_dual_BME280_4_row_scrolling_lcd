@@ -14,8 +14,8 @@
   DSW_current *current = new DSW_current;
   DSW_hourly *hourly = new DSW_hourly;
   DSW_daily  *daily = new DSW_daily;
-  DSW_minutely *minutely = new DSW_minutely;
-  //minutely = nullptr; // extra
+  //DSW_minutely *minutely = new DSW_minutely;
+  
   
   old_row0StrLen = strlen(row0Ptr); //Keeps track of the LCD line character lengths. If they change the counters in
   old_row2StrLen = strlen(row2Ptr); // the moving letter functions have to be reset and the line restarted on the LCD
@@ -27,9 +27,11 @@
   Serial.println(F("Requesting weather information from DarkSky.net... "));
 
 //yield(); //caused the sketch to stall here???
+
+  checkWiFi();
   
-  //dsw.getForecast(current, hourly, daily, api_key, latitude, longitude, units, language);
-  dsw.getForecast(current, minutely, hourly, daily, api_key, latitude, longitude, units, language);
+  dsw.getForecast(current, hourly, daily, api_key, latitude, longitude, units, language);
+  //dsw.getForecast(current, minutely, hourly, daily, api_key, latitude, longitude, units, language);
 
 
   //Serial display of number of DarkSky accesses since last boot 
@@ -284,6 +286,7 @@ row3Ptr[charCntL3C + 42] = 0;
 
   // Delete to free up space and prevent fragmentation as strings change in length
   delete current;
+  //delete minutely;
   delete hourly;
   delete daily;
 
@@ -324,3 +327,19 @@ row3Ptr[charCntL3C + 42] = 0;
 //**************************************************************
 //************* END Function void getDarkSky()******************
 //**************************************************************
+
+/*
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation 
+ * files (the "Software"), to deal in the Software without restriction, including without limitation the rights to 
+ * use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons 
+ * to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE 
+WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR 
+COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, 
+ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+
+ */

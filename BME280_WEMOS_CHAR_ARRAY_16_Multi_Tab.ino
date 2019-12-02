@@ -8,20 +8,23 @@ WiFiClient client; //for Thingspeak
 //********************Location Settings*****************************
 
 //*****BASEMENT WEMOS D1 (myraclegarden.com)
-unsigned long myChannelNumber = XXXXXX;  const char * myWriteAPIKey = "XXXXXXXXXX"; String api_key = "XXXXXXXXXX";
+unsigned long myChannelNumber = 79378;  const char * myWriteAPIKey = "U0RIIBW1U68RE6B9"; String api_key = "414250ebeaabfb8a3a0d3def18efed69";
  
 //******QUONSET WEMOS D1 (mgcquonset.com)
-//unsigned long myChannelNumber = XXXXXX; const char * myWriteAPIKey = "XXXXXXXXXX"; String api_key = "XXXXXXXXXX"; //DarkSky API
+//unsigned long myChannelNumber = 77784; const char * myWriteAPIKey = "PGIXBEEVDHXX2P7E"; String api_key = "a3b5b8546a3e6c6176d070209992785c"; //DarkSky API
 
 //********************Location Settings*****************************
 
 //*********************** WIFI SETTINGS **************************
-//const char *ssid = "XXXXXXX";
-const char *ssid = "XXXXXXXXXX";
-const char *password = "XXXXXXXXXX";
+//const char *ssid = "DeMEtEr";
+const char *ssid = "DiOnySyS";
+const char *password = "QNX6SKnuCeky";
+
+//const char *ssid = "JLM_iPhone";
+//const char *password = "x7ypavwb9g86b";
 
 //const char *ssid = "Maplewood_GC"; //Quonset
-//const char *password = "XXXXXXXXXX";//Quonset
+//const char *password = "wru3A@Ur";//Quonset
 
 //***********************End WIFI SETTINGS **************************
 
@@ -334,3 +337,19 @@ ThingSpeak.begin(client);  //Thingspeak
 //**************************************************************
 //************************END VOID LOOP*************************
 //**************************************************************
+
+/*
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation 
+ * files (the "Software"), to deal in the Software without restriction, including without limitation the rights to 
+ * use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons 
+ * to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE 
+WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR 
+COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, 
+ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+
+ */
